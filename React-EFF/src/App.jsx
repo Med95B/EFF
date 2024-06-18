@@ -1,5 +1,6 @@
 
 import {useState} from 'react'
+import CompoRech from './components/CompoRech'
 
 function App() {
   
@@ -12,20 +13,16 @@ function App() {
     {nom:'sal1',service:{code:'cdcd',nom:'serv1'}}
   ]
  const [show,setShow]=useState(false)
-  const [term,setTerm]=useState('')
   const[filterSal,setFilterSal]=useState([])
-  const handleSearch=(e)=>{
-    e.preventDefault()
+  
+  const handleSearch=(term)=>{
     setFilterSal(salaries.filter(sal=>sal.service.nom.includes(term)))
     setShow(true)
   }
   return (
     <>
 <h1>APP</h1>
-<form onSubmit={handleSearch}>
-  <input type="text" value={term} onChange={e=>setTerm(e.target.value)}/>
-  <button type='submit'>rech</button>
-</form>
+<CompoRech rech={handleSearch}/>
 <h1>resultats :</h1>
 {show &&
   <ul>
